@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<link href="~/css/login.css" rel="stylesheet" />
+
+<div class="home-bg">
+    <div id="login-card" class="card shadow mt-5">
+        <div id="login-card-header" class="card-header">
+            <div class="row">
+                <div class="col-10 d-flex flex-column text-center">
+                    <div class="register-title">Register here!!</div>
+                    <div class="register-title">Enjoy your shopping</div>
+                </div>
+                <div class="col-2 d-flex justify-content-end align-items-center">
+                    <img id="kart-logo" src="~/images/shopping-cart-logo.jpg" alt="Shopping Kart Logo" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <form id="register-form">
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">Name</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Name" autocomplete="off" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="register-email" class="form-label">Email</label>
+                    <input type="email" name="email" id="register-email" class="form-control" placeholder="Email" autocomplete="off" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="register-password" class="form-label">Password</label>
+                    <input type="password" name="password" id="register-password" class="form-control" placeholder="Password" autocomplete="off" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="confirm Password" autocomplete="off" />
+                </div>
+                <span><label id="Duplicate-email" class="error"></label></span>
+                <div class="form-group text-center pt-3 mb-2">
+                    <button id="register-button" type="button" class="btn btn-outline-secondary btn-20 w-50" onclick="register()">Register</button>
+                </div>
+                <div id="register-route-link" class="form-group text-center">
+                    <span>Already have an account? </span><a asp-controller="Login" asp-action="Index">Login here!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/login.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+}

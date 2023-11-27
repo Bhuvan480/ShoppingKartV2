@@ -1,0 +1,113 @@
+﻿@using System.Linq;
+@{
+    ViewData["Title"] = "Home Page";
+
+    var totalProducts = int.Parse(ViewData["TotalProducts"].ToString());
+
+    var totalPages = totalProducts / 8;
+
+    var page = ViewData["CurrentPage"].ToString();
+    var currentPage = int.Parse(page) > 0 && int.Parse(page) <= totalPages ? page : "1";
+    var PreviousPage = int.Parse(currentPage) - 1;
+    var NextPage = int.Parse(currentPage) + 1;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var item in (ViewBag.Products as List<ProductModel>))
+        {
+            <div class="mb-3 col-sm-6 col-md-4 col-lg-3">
+                <div id="@item.ProductId" class="card m-3 h-100">
+                    <img class="card-img-top w-100 img-fluid" src="data:image/gif;base64, @Convert.ToBase64String(@item.ProductImage)" alt="Card image">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.ProductName</h5>
+                        @*<p class="card-text">@item.ProductDescription</p>*@
+                    </div>
+                    <div class="card-footer">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-6 text-center">
+                                <p class="card-text">@item.ProductPrice₹</p>
+                            </div>
+                            <a href="#" class="btn btn-primary col-6">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="p-3 d-flex justify-content-end">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+
+                @if (totalProducts > 8)
+                {
+                    @if (int.Parse(currentPage) > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?page=@PreviousPage">Prev</a>
+                        </li>
+                    }
+
+                    // Display the first page
+                    <li class="page-item @(1 == int.Parse(currentPage) ? "active" : "")">
+                        <a class="page-link" href="?page=1">1</a>
+                    </li>
+
+                    // Display the ellipsis if not on the first page
+                    @if (int.Parse(currentPage) > 4)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+
+                    // Display up to 3 pages before the current page
+                    for (int pagee = Math.Max(2, int.Parse(currentPage) - 2); pagee < int.Parse(currentPage); pagee++)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?page=@pagee">@pagee</a>
+                        </li>
+                    }
+
+                    // Display the current page
+                    @if (int.Parse(currentPage) != 1 && int.Parse(currentPage) != totalPages)
+                    {
+                        <li class="page-item active">
+                            <span class="page-link">@currentPage</span>
+                        </li>
+                    }
+
+                    // Display up to 3 pages after the current page
+                    for (int pagee = int.Parse(currentPage) + 1; pagee <= Math.Min(totalPages - 1, int.Parse(currentPage) + 2); pagee++)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?page=@pagee">@pagee</a>
+                        </li>
+                    }
+
+                    // Display the ellipsis if not on the last page
+                    @if (int.Parse(currentPage) < totalPages - 3)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+
+                    // Display the last page
+                    <li class="page-item @(totalPages == int.Parse(currentPage) ? "active" : "")">
+                        <a class="page-link" href="?page=@totalPages">@totalPages</a>
+                    </li>
+
+                    @if (int.Parse(currentPage) != totalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link"  asp-route-page="@NextPage">Next</a>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </nav>
+    </div>
+</div>

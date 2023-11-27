@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<link href="~/css/login.css" rel="stylesheet" />
+
+<div class="home-bg">
+    <div id="login-card" class="card shadow mt-5">
+        <div id="login-card-header" class="card-header">
+            <div class="row">
+                <div class="col-6 d-flex flex-column align-items-center mt-5">
+                    <div class="slant-title">Welcome</div>
+                    <div class="slant-title">To</div>
+                    <div class="slant-title">Shopping Kart</div>
+                </div>
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    <img id="kart-logo" src="~/images/shopping-cart-logo.jpg" alt="Shopping Kart Logo" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <form id="login-form">
+                <div class="form-group mb-3">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="email" name="email" id="login-email" class="form-control" placeholder="Email" autocomplete="off" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" name="password" id="login-password" class="form-control" placeholder="Password" autocomplete="off" />
+                </div>
+                <div class="form-group text-center pt-3 mb-2">
+                    <button id="login-button" type="button" class="btn btn-outline-secondary btn-20 w-50" onclick="login()">Login</button>
+                </div>
+                <div id="register-route-link" class="form-group text-center">
+                    <span>New user? </span><a asp-controller="Register" asp-action="Index">Register here!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/login.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+}
